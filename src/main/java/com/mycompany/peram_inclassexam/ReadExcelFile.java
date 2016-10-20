@@ -9,11 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -24,9 +22,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author S525754
  */
 public class ReadExcelFile {
-     private static final String FILE_PATH = "Peram_input.xlsx";
-     public  List getAccountListFromExcel() throws FileNotFoundException{
-         List accountList = new ArrayList();
+
+    private static final String FILE_PATH = "Peram_input.xlsx";
+
+    public List getAccountListFromExcel() throws FileNotFoundException {
+        List accountList = new ArrayList();
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(FILE_PATH);
@@ -35,62 +35,42 @@ public class ReadExcelFile {
             int numberOfSheets = workbook.getNumberOfSheets();
             for (int i = 0; i < numberOfSheets; i++) {
                 Sheet sheet = workbook.getSheetAt(i);
-                Iterator rowIterator = sheet.iterator();
-          while (rowIterator.hasNext()) {
-                    AccountDetails account = new AccountDetails();
 
-                    Row row = (Row) rowIterator.next();
-                    
-                    
-                  
-                         Iterator cellIterator = row.cellIterator();
+                for (int j = 1; j < sheet.getPhysicalNumberOfRows(); j++) {
+                    AccountDetails account = new AccountDetails();
+                    Row row = (Row) sheet.getRow(j);
+
+                    Iterator cellIterator = row.cellIterator();
                     while (cellIterator.hasNext()) {
-                       
+
                         Cell cell = (Cell) cellIterator.next();
-                     
-                   
-                       
+
                         if (Cell.CELL_TYPE_STRING == cell.getCellType()) {
-                           
-                            
-                           
+
                             if (cell.getColumnIndex() == 1) {
-                                 account.setLastName(cell.getStringCellValue());
+                                account.setLastName(cell.getStringCellValue());
                             }
-                            
-                            
-                           
+
                             if (cell.getColumnIndex() == 2) {
-                                 account.setAccountNo(cell.getStringCellValue());
+                                account.setAccountNo(cell.getStringCellValue());
                             }
-                            
-                            
-                            
+
                             if (cell.getColumnIndex() == 0) {
                                 account.setFirstName(cell.getStringCellValue());
                             }
-                     
-                        }
-                        
-                       
-                        else if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) {
 
-                            
+                        } else if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) {
+
                             if (cell.getColumnIndex() == 3) {
-                                 account.setAccountBalance((int) cell.getNumericCellValue());
+                                account.setAccountBalance((int) cell.getNumericCellValue());
                             }
-                            
-                           
-                           
-                           
-
                         }
-                    
+
                     }
-                    
-                   
+
                     accountList.add(account);
                 }
+
             }
 
             fis.close();
@@ -101,5 +81,5 @@ public class ReadExcelFile {
             e.printStackTrace();
         }
         return accountList;
-     }
+    }
 }

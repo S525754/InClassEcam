@@ -33,12 +33,14 @@ public class WritePDFFile {
         
         Image image = Image.getInstance("image.png");
         
-        image.scaleToFit(450f, 1500f);
+        image.scaleToFit(450f, 1800f);
+        
         
         document.add(image);
+        document.add(new Paragraph("--------------------------------------------------------------------------------------------------------------------------"));
         
         Paragraph welcomeParagraph = new Paragraph("Welcome! " + account.getFirstName() + " " + account.getLastName() + "!" );
-        welcomeParagraph.setSpacingBefore(80);
+        welcomeParagraph.setSpacingBefore(50);
         
         document.add(welcomeParagraph);
         
@@ -48,7 +50,7 @@ public class WritePDFFile {
         String acctBalance = String.format("Account Balance: $%.1f", account.getAccountBalance());
         
         Paragraph detailsPara = new Paragraph("Below are your Account Details:\n" + firstName + "\n" + lastName + "\n" + acctNumber + "\n" + acctBalance );
-        detailsPara.setIndentationLeft(50);
+        detailsPara.setIndentationLeft(30);
         detailsPara.setSpacingBefore(20);
         document.add(detailsPara);
         

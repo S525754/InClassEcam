@@ -13,13 +13,13 @@ public class AccountDetails {
     private String firstName;
     private String lastName;
     private String accountNo;
-    private int accountBalance;
+    private double accountBalance;
     
     public AccountDetails(){
         
     }
     
-    public AccountDetails(String firstName, String lastName, String accountNo, int accountBalance){
+    public AccountDetails(String firstName, String lastName, String accountNo, double accountBalance){
         this. firstName = firstName;
         this.lastName = lastName;
         this.accountNo = accountNo;
@@ -38,7 +38,7 @@ public class AccountDetails {
         return accountNo;
     }
 
-    public int getAccountBalance() {
+    public double getAccountBalance() {
         return accountBalance;
     }
 
@@ -54,12 +54,7 @@ public class AccountDetails {
         this.accountNo = accountNo;
     }
 
-    public void setAccountBalance(int accountBalance) {
+    public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
     }
-
-    void open() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

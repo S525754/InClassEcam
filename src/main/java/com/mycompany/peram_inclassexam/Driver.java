@@ -19,6 +19,9 @@ public class Driver {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     * @throws com.itextpdf.text.DocumentException
+     * @throws com.itextpdf.text.BadElementException
      */
     public static void main(String[] args) throws FileNotFoundException, DocumentException, BadElementException, IOException {
         ReadExcelFile read = new ReadExcelFile();
